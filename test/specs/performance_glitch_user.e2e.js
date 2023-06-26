@@ -12,14 +12,67 @@ describe("go to login user", () => {
     await expect(LoginPage.loginButton).toBeDisplayed();
     await expect(LoginPage.userNameInput).toBeDisplayed();
 
+    const startTime = Date.now();
+
     await LoginPage.loginForm("performance_glitch_user", "secret_sauce");
     await LoginPage.loginButtonClick();
 
-    await browser.pause(10000);
-
     const currentUrl = await browser.getUrl();
     expect(currentUrl).toEqual("https://www.saucedemo.com/inventory.html");
-  });
+
+    const endTime = Date.now();
+    const executionTime = endTime - startTime;
+    console.log(`Login execution time: ${executionTime} ms`);
+    expect(executionTime).toBeLessThan(2000);
+    });
+
+    it("Buy error", async () => {
+      await expect(AddToCart.addbackpackButton).toBeDisplayed();
+      await expect(AddToCart.addjacketButton).toBeDisplayed();
+
+      await AddToCart.addbackpackButtonClick();
+
+      await AddToCart.addjacketButton.scrollIntoView();
+      await AddToCart.addjacketButtonClick();
+
+      await expect(AddToCart.removejacketButton).toBeDisplayed();
+      await AddToCart.removejacketButtonClick();
+
+      await expect(AddToCart.toCart).toBeDisplayed();
+      await AddToCart.toCartClick();
+
+      await expect(AddToCart.checkout).toBeDisplayed();
+      await AddToCart.checkoutClick();
+
+      await AddToCart.checkoutForm("", "", "");
+      await expect(AddToCart.continue).toBeDisplayed();
+      await AddToCart.continueClick();
+
+      await expect(AddToCart.errorMessage).toHaveTextContaining(
+        "Error: First Name is required"
+      );
+    });
+
+    it("Buy", async () => {
+      await AddToCart.checkoutForm("Barbara", "Millan", "2000");
+      await expect(AddToCart.continue).toBeDisplayed();
+      await AddToCart.continueClick();
+
+      await expect(AddToCart.finish).toBeDisplayed();
+      await AddToCart.finish.click();
+
+      const startTime = Date.now();
+
+      await AddToCart.backHomeClick();
+
+      const currentUrl = await browser.getUrl();
+      expect(currentUrl).toEqual("https://www.saucedemo.com/inventory.html");
+
+      const endTime = Date.now();
+      const executionTime = endTime - startTime;
+      console.log(`Login execution time: ${executionTime} ms`);
+      expect(executionTime).toBeLessThan(2000);
+    });
 
   it("open facebook", async () => {
     await UserHomePage.footerFbButton.scrollIntoView();
@@ -76,47 +129,6 @@ describe("go to login user", () => {
 
     const originalWindowHandle = windowHandles[0];
     await browser.switchToWindow(originalWindowHandle);
-  });
-
-  it("Buy", async () => {
-    await expect(AddToCart.addbackpackButton).toBeDisplayed();
-    await AddToCart.addbackpackButtonClick();
-
-    await expect(AddToCart.toCart).toBeDisplayed();
-    await AddToCart.toCartClick();
-
-    await expect(AddToCart.checkout).toBeDisplayed();
-    await AddToCart.checkoutClick();
-
-    await AddToCart.checkoutForm("Barbara", "Millan", "2000");
-    await expect(AddToCart.continue).toBeDisplayed();
-    await AddToCart.continueClick();
-
-    await expect(AddToCart.finish).toBeDisplayed();
-    await AddToCart.finish.click();
-
-    await AddToCart.backHomeClick();
-
-    await browser.pause(10000);
-  });
-
-  it("Buy error", async () => {AddToCart
-    await expect(AddToCart.addButton).toBeDisplayed();
-    await AddToCart.addButtonClick();
-
-    await expect(AddToCart.toCart).toBeDisplayed();
-    await AddToCart.toCartClick();
-
-    await expect(AddToCart.checkout).toBeDisplayed();
-    await AddToCart.checkoutClick();
-
-    await AddToCart.checkoutForm("", "", "");
-    await expect(AddToCart.continue).toBeDisplayed();
-    await AddToCart.continueClick();
-
-    await expect(AddToCart.errorMessage).toHaveTextContaining(
-      "Error: First Name is required"
-    );
   });
 
   it("navbar user", async () => {
