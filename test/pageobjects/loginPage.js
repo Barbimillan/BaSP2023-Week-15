@@ -17,14 +17,6 @@ class loginPage {
     );
   }
 
-  get footerContain() {
-    return $("#page_wrapper > footer");
-  }
-
-  get footerFbButton() {
-    return $("#page_wrapper > footer > ul > li.social_facebook > a");
-  }
-
   async loginForm(username, password) {
     await this.userNameInput.setValue(username);
     await this.passwordInput.setValue(password);

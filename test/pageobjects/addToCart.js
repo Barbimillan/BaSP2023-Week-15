@@ -1,6 +1,14 @@
 class addToCart {
-  get addButton() {
+  get addbackpackButton() {
     return $("#add-to-cart-sauce-labs-backpack");
+  }
+
+  get addjacketButton() {
+    return $('#add-to-cart-sauce-labs-fleece-jacket')
+  }
+
+  get removejacketButton() {
+    return $('#remove-sauce-labs-fleece-jacket')
   }
 
   get toCart() {
@@ -41,8 +49,16 @@ class addToCart {
     );
   }
 
-  async addButtonClick() {
-    await this.addButton.click();
+  async addbackpackButtonClick() {
+    await this.addbackpackButton.click();
+  }
+
+  async addjacketButtonClick() {
+    await this.addjacketButton.click();
+  }
+
+  async removejacketButtonClick() {
+    await this.removejacketButton.click();
   }
 
   async toCartClick() {

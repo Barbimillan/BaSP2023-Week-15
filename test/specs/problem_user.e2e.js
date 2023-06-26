@@ -19,9 +19,66 @@ describe("go to login user", () => {
     expect(currentUrl).toEqual("https://www.saucedemo.com/inventory.html");
   });
 
+  it("open facebook", async () => {
+    await userHomePage.footerFbButton.scrollIntoView();
+    await expect(userHomePage.footerFbButton).toBeDisplayed();
+    await userHomePage.footerFbButtonClick();
+
+    const windowHandles = await browser.getWindowHandles();
+
+    const facebookWindowHandle = windowHandles[windowHandles.length - 1];
+    await browser.switchToWindow(facebookWindowHandle);
+
+    const facebookTitle = await browser.getTitle();
+    expect(facebookTitle).toBeDisplayed("facebook");
+
+    await browser.closeWindow();
+
+    const originalWindowHandle = windowHandles[0];
+    await browser.switchToWindow(originalWindowHandle);
+  });
+
+  it("open twitter", async () => {
+    await userHomePage.footerTWButton.scrollIntoView();
+    await expect(userHomePage.footerTWButton).toBeDisplayed();
+    await userHomePage.footerTWButtonClick();
+
+    const windowHandles = await browser.getWindowHandles();
+
+    const twitterWindowHandle = windowHandles[windowHandles.length - 1];
+    await browser.switchToWindow(twitterWindowHandle);
+
+    const twitterTitle = await browser.getTitle();
+    expect(twitterTitle).toBeDisplayed("twitter");
+
+    await browser.closeWindow();
+
+    const originalWindowHandle = windowHandles[0];
+    await browser.switchToWindow(originalWindowHandle);
+  });
+
+  it("open linkedin", async () => {
+    await userHomePage.footerlinkedinButton.scrollIntoView();
+    await expect(userHomePage.footerlinkedinButton).toBeDisplayed();
+    await userHomePage.footerlinkedinButtonClick();
+
+    const windowHandles = await browser.getWindowHandles();
+
+    const linkedinWindowHandle = windowHandles[windowHandles.length - 1];
+    await browser.switchToWindow(linkedinWindowHandle);
+
+    const linkedinTitle = await browser.getTitle();
+    expect(linkedinTitle).toBeDisplayed("linkedin");
+
+    await browser.closeWindow();
+
+    const originalWindowHandle = windowHandles[0];
+    await browser.switchToWindow(originalWindowHandle);
+  });
+
   it("Buy", async () => {
-    await expect(addToCart.addButton).toBeDisplayed();
-    await addToCart.addButtonClick();
+    await expect(addToCart.addbackpackButton).toBeDisplayed();
+    await addToCart.addbackpackButtonClick();
 
     await expect(addToCart.toCart).toBeDisplayed();
     await addToCart.toCartClick();
