@@ -1,4 +1,4 @@
-class userHomePage {
+class UserHomePage {
   async loginform(username, password) {
     await this.userNameInput.setValue(username);
     await this.passwordInput.setValue(password);
@@ -65,4 +65,4 @@ class userHomePage {
   }
 }
 
-export default new userHomePage();
+export default new UserHomePage();

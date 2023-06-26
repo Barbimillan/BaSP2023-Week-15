@@ -1,4 +1,4 @@
-class addToCart {
+class AddToCart {
   get addbackpackButton() {
     return $("#add-to-cart-sauce-labs-backpack");
   }
@@ -84,4 +84,4 @@ class addToCart {
   }
 }
 
-export default new addToCart();
+export default new AddToCart();

@@ -1,6 +1,6 @@
-import loginPage from "../pageobjects/loginPage.js";
-import userHomePage from "../pageobjects/homePageuser.js";
-import addToCart from "../pageobjects/addToCart.js";
+import LoginPage from "../pageobjects/LoginPage.js";
+import UserHomePage from "../pageobjects/homePageuser.js";
+import AddToCart from "../pageobjects/addToCart.js";
 
 describe("go to login user", () => {
   beforeAll(() => {
@@ -9,58 +9,58 @@ describe("go to login user", () => {
   });
 
   it("success process", async () => {
-    await expect(loginPage.loginButton).toBeDisplayed();
-    await expect(loginPage.userNameInput).toBeDisplayed();
+    await expect(LoginPage.loginButton).toBeDisplayed();
+    await expect(LoginPage.userNameInput).toBeDisplayed();
 
-    await loginPage.loginForm("standard_user", "secret_sauce");
-    await loginPage.loginButtonClick();
+    await LoginPage.loginForm("standard_user", "secret_sauce");
+    await LoginPage.loginButtonClick();
 
     const currentUrl = await browser.getUrl();
     expect(currentUrl).toEqual("https://www.saucedemo.com/inventory.html");
   });
 
   it("Buy error", async () => {
-    await expect(addToCart.addbackpackButton).toBeDisplayed();
-    await expect(addToCart.addjacketButton).toBeDisplayed();
+    await expect(AddToCart.addbackpackButton).toBeDisplayed();
+    await expect(AddToCart.addjacketButton).toBeDisplayed();
 
-    await addToCart.addbackpackButtonClick();
+    await AddToCart.addbackpackButtonClick();
 
-    await addToCart.addjacketButton.scrollIntoView();
-    await addToCart.addjacketButtonClick();
+    await AddToCart.addjacketButton.scrollIntoView();
+    await AddToCart.addjacketButtonClick();
 
-    await expect(addToCart.removejacketButton).toBeDisplayed();
-    await addToCart.removejacketButtonClick();
+    await expect(AddToCart.removejacketButton).toBeDisplayed();
+    await AddToCart.removejacketButtonClick();
 
-    await expect(addToCart.toCart).toBeDisplayed();
-    await addToCart.toCartClick();
+    await expect(AddToCart.toCart).toBeDisplayed();
+    await AddToCart.toCartClick();
 
-    await expect(addToCart.checkout).toBeDisplayed();
-    await addToCart.checkoutClick();
+    await expect(AddToCart.checkout).toBeDisplayed();
+    await AddToCart.checkoutClick();
 
-    await addToCart.checkoutForm("", "", "");
-    await expect(addToCart.continue).toBeDisplayed();
-    await addToCart.continueClick();
+    await AddToCart.checkoutForm("", "", "");
+    await expect(AddToCart.continue).toBeDisplayed();
+    await AddToCart.continueClick();
 
-    await expect(addToCart.errorMessage).toHaveTextContaining(
+    await expect(AddToCart.errorMessage).toHaveTextContaining(
       "Error: First Name is required"
     );
   });
 
   it("Buy", async () => {
-    await addToCart.checkoutForm("Barbara", "Millan", "2000");
-    await expect(addToCart.continue).toBeDisplayed();
-    await addToCart.continueClick();
+    await AddToCart.checkoutForm("Barbara", "Millan", "2000");
+    await expect(AddToCart.continue).toBeDisplayed();
+    await AddToCart.continueClick();
 
-    await expect(addToCart.finish).toBeDisplayed();
-    await addToCart.finish.click();
+    await expect(AddToCart.finish).toBeDisplayed();
+    await AddToCart.finish.click();
 
-    await addToCart.backHomeClick();
+    await AddToCart.backHomeClick();
   });
 
   it("open facebook", async () => {
-    await userHomePage.footerFbButton.scrollIntoView();
-    await expect(userHomePage.footerFbButton).toBeDisplayed();
-    await userHomePage.footerFbButtonClick();
+    await UserHomePage.footerFbButton.scrollIntoView();
+    await expect(UserHomePage.footerFbButton).toBeDisplayed();
+    await UserHomePage.footerFbButtonClick();
 
     const windowHandles = await browser.getWindowHandles();
 
@@ -77,9 +77,9 @@ describe("go to login user", () => {
   });
 
   it("open twitter", async () => {
-    await userHomePage.footerTWButton.scrollIntoView();
-    await expect(userHomePage.footerTWButton).toBeDisplayed();
-    await userHomePage.footerTWButtonClick();
+    await UserHomePage.footerTWButton.scrollIntoView();
+    await expect(UserHomePage.footerTWButton).toBeDisplayed();
+    await UserHomePage.footerTWButtonClick();
 
     const windowHandles = await browser.getWindowHandles();
 
@@ -96,9 +96,9 @@ describe("go to login user", () => {
   });
 
   it("open linkedin", async () => {
-    await userHomePage.footerlinkedinButton.scrollIntoView();
-    await expect(userHomePage.footerlinkedinButton).toBeDisplayed();
-    await userHomePage.footerlinkedinButtonClick();
+    await UserHomePage.footerlinkedinButton.scrollIntoView();
+    await expect(UserHomePage.footerlinkedinButton).toBeDisplayed();
+    await UserHomePage.footerlinkedinButtonClick();
 
     const windowHandles = await browser.getWindowHandles();
 
@@ -115,11 +115,11 @@ describe("go to login user", () => {
   });
 
   it("navbar user", async () => {
-    await expect(userHomePage.productsText).toBeDisplayed();
-    await expect(userHomePage.buttonBurguer).toBeDisplayed();
-    await userHomePage.buttonBurguerClick();
+    await expect(UserHomePage.productsText).toBeDisplayed();
+    await expect(UserHomePage.buttonBurguer).toBeDisplayed();
+    await UserHomePage.buttonBurguerClick();
 
-    await expect(userHomePage.logOutButton).toBeDisplayed();
-    await userHomePage.logOutButtonClick();
+    await expect(UserHomePage.logOutButton).toBeDisplayed();
+    await UserHomePage.logOutButtonClick();
   });
 });

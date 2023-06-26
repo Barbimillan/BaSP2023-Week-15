@@ -1,5 +1,4 @@
-import loginPage from "../pageobjects/loginPage.js";
-import addToCart from "../pageobjects/addToCart.js";
+import LoginPage from "../pageobjects/LoginPage.js";
 
 describe("go to login user", () => {
   beforeAll(() => {
@@ -8,11 +7,11 @@ describe("go to login user", () => {
   });
 
   it("success process", async () => {
-    await expect(loginPage.loginButton).toBeDisplayed();
-    await expect(loginPage.userNameInput).toBeDisplayed();
-    await loginPage.loginForm("locked_out_user", "secret_sauce");
-    await loginPage.loginButtonClick();
-    await expect(loginPage.errorMessage).toHaveTextContaining(
+    await expect(LoginPage.loginButton).toBeDisplayed();
+    await expect(LoginPage.userNameInput).toBeDisplayed();
+    await LoginPage.loginForm("locked_out_user", "secret_sauce");
+    await LoginPage.loginButtonClick();
+    await expect(LoginPage.errorMessage).toHaveTextContaining(
       "Epic sadface: Sorry, this user has been locked out."
     );
   });
